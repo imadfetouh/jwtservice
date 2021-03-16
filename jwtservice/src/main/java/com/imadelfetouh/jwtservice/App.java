@@ -5,11 +5,16 @@ import com.imadelfetouh.jwtservice.rabbit.RabbitConnection;
 import com.rabbitmq.client.*;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeoutException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class App {
+
+    private static final Logger logger = Logger.getLogger(App.class.getName());
 
     private static final Object monitor = new Object();
 
@@ -28,8 +33,9 @@ public class App {
                         .correlationId(delivery.getProperties().getCorrelationId())
                         .build();
 
-                String message = new String(delivery.getBody(), "UTF-8");
-                System.out.println("received id: " + message);
+                String message = new String(delivery.getBody(), StandardCharsets.UTF_8);
+
+                logger.log(Level.ALL, "Message received: " + message);
 
                 Map<String, String> claims = new HashMap<>();
                 claims.put("userId", message);
@@ -42,10 +48,8 @@ public class App {
 
             startMonitor();
 
-        } catch (TimeoutException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (TimeoutException | IOException e) {
+            logger.log(Level.ALL, e.getMessage());
         }
     }
 
@@ -56,8 +60,8 @@ public class App {
                     monitor.wait();
                     break;
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
-                    break;
+                    logger.log(Level.ALL, e.getMessage());
+                    Thread.currentThread().interrupt();
                 }
             }
         }

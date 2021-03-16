@@ -20,7 +20,7 @@ public class CreateJWTToken {
 
         Key key = SecretKeyGenerator.getInstance().getKey();
 
-        Header header = Jwts.header();
+        Header<?> header = Jwts.header();
         header.setType("JWT");
 
         return Jwts.builder()

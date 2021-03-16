@@ -11,7 +11,7 @@ public class SecretKeyGenerator {
     private Key key;
 
     public static SecretKeyGenerator getInstance(){
-        return (secretKeyGenerator == null) ? new SecretKeyGenerator() : secretKeyGenerator;
+        return secretKeyGenerator;
     }
 
     public Key getKey() {
