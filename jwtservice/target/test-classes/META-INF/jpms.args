@@ -1,0 +1,4 @@
+--patch-module
+jwtservice=_
+--add-reads
+jwtservice=ALL-UNNAMED

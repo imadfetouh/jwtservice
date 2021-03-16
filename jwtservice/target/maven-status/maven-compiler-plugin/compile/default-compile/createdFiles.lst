@@ -1,0 +1,5 @@
+com\imadelfetouh\jwtservice\jwt\SecretKeyGenerator.class
+com\imadelfetouh\jwtservice\rabbit\RabbitConnection.class
+module-info.class
+com\imadelfetouh\jwtservice\App.class
+com\imadelfetouh\jwtservice\jwt\CreateJWTToken.class
