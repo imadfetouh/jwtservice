@@ -12,6 +12,10 @@ public class CreateJWTToken {
 
     private static CreateJWTToken createToken = new CreateJWTToken();
 
+    private CreateJWTToken() {
+
+    }
+
     public static CreateJWTToken getInstance(){
         return (createToken == null) ? new CreateJWTToken() : createToken;
     }
