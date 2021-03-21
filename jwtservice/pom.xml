@@ -7,6 +7,7 @@
     <groupId>com.imadelfetouh</groupId>
     <artifactId>jwtservice</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
@@ -55,11 +56,37 @@
     </dependencies>
 
     <build>
+        <finalName>jwt</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>example</id>
+                        <configuration>
+                            <archive>
+                                <manifest>
+                                    <mainClass>com.imadelfetouh.jwtservice.App</mainClass>
+                                </manifest>
+                            </archive>
+                            <descriptorRefs>
+                                <descriptorRef>jar-with-dependencies</descriptorRef>
+                            </descriptorRefs>
+                            <appendAssemblyId>false</appendAssemblyId>
+                        </configuration>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
