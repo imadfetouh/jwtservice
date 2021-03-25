@@ -8,13 +8,6 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- task: SonarCloudPrepare@1
-  inputs:
-    SonarCloud: 'SonarCloud'
-    organization: 'imadfetouh'
-    scannerMode: 'MSBuild'
-    projectKey: 'imadfetouh_jwtservice'
-    projectName: 'jwtservice'
 
 - task: Maven@3
   inputs:
