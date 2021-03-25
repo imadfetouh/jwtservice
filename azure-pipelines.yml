@@ -1,17 +1,13 @@
 trigger:
 - main
 
+variables:
+  RABBIT_HOST: rabbit-internal-service
+
 pool:
   vmImage: ubuntu-latest
 
 steps:
-- task: SonarCloudPrepare@1
-  inputs:
-    SonarCloud: 'SonarCloud'
-    organization: 'imadfetouh'
-    scannerMode: 'MSBuild'
-    projectKey: 'imadfetouh_jwtservice'
-    projectName: 'jwtservice'
 
 - task: Maven@3
   inputs:
@@ -26,7 +22,12 @@ steps:
     sonarQubeRunAnalysis: true
     sqMavenPluginVersionChoice: 'latest'
     
-- task: SonarCloudPublish@1
+- task: Docker@2
   inputs:
-    pollingTimeoutSec: '300'
+    containerRegistry: 'DockerRegistry'
+    repository: 'imadelfetouh99/jwtservice'
+    command: 'buildAndPush'
+    Dockerfile: 'Dockerfile'
+    buildContext: 
+    tags: 'latest'
     
