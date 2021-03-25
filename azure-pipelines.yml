@@ -1,6 +1,9 @@
 trigger:
 - main
 
+variables:
+  RABBIT_HOST: rabbit-internal-service
+
 pool:
   vmImage: ubuntu-latest
 
@@ -26,7 +29,12 @@ steps:
     sonarQubeRunAnalysis: true
     sqMavenPluginVersionChoice: 'latest'
     
-- task: SonarCloudPublish@1
+- task: Docker@2
   inputs:
-    pollingTimeoutSec: '300'
+    containerRegistry: 'DockerRegistry'
+    repository: 'imadelfetouh99/jwtservice'
+    command: 'buildAndPush'
+    Dockerfile: 'Dockerfile'
+    buildContext: 
+    tags: 'latest'
     
