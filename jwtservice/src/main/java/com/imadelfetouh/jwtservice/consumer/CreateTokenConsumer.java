@@ -11,11 +11,9 @@ import java.io.IOException;
 public class CreateTokenConsumer implements Consumer {
 
     private final String QUEUE_NAME;
-    private final Object monitor;
 
     public CreateTokenConsumer() {
         QUEUE_NAME = "createtoken_queue";
-        monitor = new Object();
     }
 
     @Override
@@ -25,7 +23,7 @@ public class CreateTokenConsumer implements Consumer {
             DeliverCallback deliverCallback = new CreateTokenDeliverCallBack(channel);
             channel.basicConsume(QUEUE_NAME, true, deliverCallback, s -> {});
 
-            Monitor.getInstance().start(monitor);
+            new Monitor().start();
         } catch (IOException e) {
             e.printStackTrace();
         }

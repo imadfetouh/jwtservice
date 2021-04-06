@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jwtservice-deployment
+  labels:
+    app: jwtservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jwtservice
+  template:
+    metadata:
+      labels:
+        app: jwtservice
+    spec:
+      containers:
+        - name: jwtservice
+          imagePullPolicy: Always
+          image: imadelfetouh99/jwtservice:latest
+          env:
+            - name: RABBIT_HOST
+              value: rabbit-service

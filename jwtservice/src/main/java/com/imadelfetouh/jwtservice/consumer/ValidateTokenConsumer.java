@@ -27,7 +27,7 @@ public class ValidateTokenConsumer implements Consumer {
             DeliverCallback deliverCallback = new ValidateTokenDeliverCallBack(channel);
             channel.basicConsume(QUEUE_NAME, true, deliverCallback, s -> {});
 
-            Monitor.getInstance().start(monitor);
+            new Monitor().start();
         } catch (IOException e) {
             e.printStackTrace();
         }
