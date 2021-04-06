@@ -2,7 +2,7 @@ trigger:
 - main
 
 variables:
-  RABBIT_HOST: rabbit-internal-service
+  RABBIT_HOST: localhost
 
 pool:
   vmImage: ubuntu-latest
