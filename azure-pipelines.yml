@@ -27,7 +27,7 @@ steps:
     containerRegistry: 'DockerRegistry'
     repository: 'imadelfetouh99/jwtservice'
     command: 'buildAndPush'
-    Dockerfile: 'Dockerfile'
+    Dockerfile: 'docker/Dockerfile'
     buildContext: 
     tags: 'latest'
     
