@@ -1,6 +1,5 @@
 package com.imadelfetouh.jwtservice.consumer;
 
-import com.imadelfetouh.jwtservice.deliverer.CreateTokenDeliverCallBack;
 import com.imadelfetouh.jwtservice.deliverer.ValidateTokenDeliverCallBack;
 import com.imadelfetouh.jwtservice.rabbit.Consumer;
 import com.imadelfetouh.jwtservice.thread.Monitor;
@@ -12,11 +11,9 @@ import java.io.IOException;
 public class ValidateTokenConsumer implements Consumer {
 
     private final String QUEUE_NAME;
-    private final Object monitor;
 
     public ValidateTokenConsumer() {
         QUEUE_NAME = "validatetoken_queue";
-        monitor = new Object();
     }
 
 

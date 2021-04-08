@@ -1,12 +1,9 @@
 package com.imadelfetouh.jwtservice.jwt;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 
 import java.security.Key;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ValidateJWTToken {
@@ -19,25 +16,18 @@ public class ValidateJWTToken {
         return validateJWTToken;
     }
 
-    private Jws<Claims> getClaims(String jwtToken){
+    public boolean validate(String jwtToken){
         Key key = SecretKeyGenerator.getInstance().getKey();
 
-        return Jwts.parserBuilder()
-                .setSigningKey(key)
-                .build()
-                .parseClaimsJws(jwtToken);
-    }
-
-    public String getUserId(String jwtToken){
-
-        try {
-            return (String) getClaims(jwtToken).getBody().get("userId");
+        try{
+            Jwts.parserBuilder()
+                    .setSigningKey(key)
+                    .build()
+                    .parseClaimsJws(jwtToken);
+            return true;
         }
-        catch (JwtException e){
-            LOGGER.log(Level.ALL, e.getMessage());
-            return null;
+        catch (JwtException e) {
+            return false;
         }
     }
-
-
 }

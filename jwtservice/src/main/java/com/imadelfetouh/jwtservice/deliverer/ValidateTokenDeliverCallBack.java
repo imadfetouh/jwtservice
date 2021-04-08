@@ -25,10 +25,13 @@ public class ValidateTokenDeliverCallBack implements DeliverCallback {
     @Override
     public void handle(String s, Delivery delivery) throws IOException {
         AMQP.BasicProperties properties = rabbitConfig.getProperties(delivery.getProperties().getCorrelationId());
-        String message = new String(delivery.getBody(), StandardCharsets.UTF_8);
+        String token = new String(delivery.getBody(), StandardCharsets.UTF_8);
 
-        String userId = validateJWTToken.getUserId(message);
-
-        channel.basicPublish("", delivery.getProperties().getReplyTo(), properties, userId.getBytes());
+        if(validateJWTToken.validate(token)){
+            channel.basicPublish("", delivery.getProperties().getReplyTo(), properties, token.getBytes());
+        }
+        else{
+            channel.basicPublish("", delivery.getProperties().getReplyTo(), properties, null);
+        }
     }
 }
