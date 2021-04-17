@@ -21,3 +21,7 @@ spec:
           env:
             - name: RABBIT_HOST
               value: rabbit-service
+          resources:
+            limits:
+              memory: 256Mi
+              cpu: 100m
